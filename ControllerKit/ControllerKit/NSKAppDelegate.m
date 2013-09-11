@@ -14,8 +14,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.tintColor = [UIColor redColor];
 
     NSKViewController *viewController = [[NSKViewController alloc] init];
+    
     self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];
     return YES;
