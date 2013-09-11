@@ -1,0 +1,10 @@
+PODS:
+  - UIView+AutoLayout (0.8.0)
+
+DEPENDENCIES:
+  - UIView+AutoLayout
+
+SPEC CHECKSUMS:
+  UIView+AutoLayout: aee87977b9c373cd81f40048c700224511f720b3
+
+COCOAPODS: 0.19.1
