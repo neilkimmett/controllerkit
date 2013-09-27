@@ -11,6 +11,8 @@
 #import "NSKViewController.h"
 #import "UIView+AutoLayout.h"
 #import "SoundBankPlayer.h"
+#import "NSKRoundButton.h"
+#import "UIColor+LightAndDark.h"
 
 @interface NSKViewController ()
 @property (nonatomic, strong) NSArray *controllerArray;
@@ -19,11 +21,17 @@
 
 @implementation NSKViewController
 
+//RGB color macro
+#define UIColorFromRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 - (id)init
 {
     self = [super init];
     if (self) {
-        NSNotificationCenter* center = [NSNotificationCenter defaultCenter];
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         
         [center addObserver:self selector:@selector(setupControllers:)
                         name:GCControllerDidConnectNotification object:nil];
@@ -56,21 +64,26 @@
             forControlEvents:UIControlEventTouchUpInside];
     
     NSMutableArray *buttons = [NSMutableArray array];
-    for (NSString *buttonName in @[@"A", @"B", @"X", @"Y"]) {
-        UIButton *btn = [self buttonWithButtonName:buttonName];
+    NSDictionary *colorsByButtonName = @{@"A": @[[UIColor redColor], UIColorFromRGB(0xd9294c)],
+                                          @"B": @[[UIColor greenColor], UIColorFromRGB(0x2cdd2d)],
+                                          @"X": @[[UIColor yellowColor], UIColorFromRGB(0xe9eb3a)],
+                                          @"Y": @[[UIColor cyanColor], UIColorFromRGB(0x29d6f3)]};
+    [colorsByButtonName enumerateKeysAndObjectsUsingBlock:^(NSString *buttonName, NSArray *colors, BOOL *stop) {
+        UIButton *btn = [self buttonWithButtonName:buttonName color1:colors[0] color2:colors[1]];
         [self.view addSubview:btn];
         [buttons addObject:btn];
         
         [btn autoSetDimension:ALDimensionHeight toSize:100];
         [btn autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
-    }
+    }];
     [self.view autoDistributeSubviews:buttons alongAxis:ALAxisHorizontal withFixedSize:100 alignment:NSLayoutFormatAlignAllTop];
     
-    UIButton *l = [self buttonWithButtonName:@"L"];
-    UIButton *r = [self buttonWithButtonName:@"R"];
+    NSKRoundButton *l = [self buttonWithButtonName:@"L" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
+    l.rounded = NO;
+    NSKRoundButton *r = [self buttonWithButtonName:@"R" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
+    r.rounded = NO;
     [self.view addSubview:l];
     [self.view addSubview:r];
-//    [l autoSetDimension:ALDimensionHeight toSize:100];
     [l autoSetDimensionsToSize:CGSizeMake(100, 100)];
     [r autoSetDimensionsToSize:CGSizeMake(100, 100)];
     
@@ -84,15 +97,16 @@
 //    [self.view autoDistributeSubviews:@[l, r] alongAxis:ALAxisHorizontal withFixedSize:100 alignment:NSLayoutFormatAlignAllTop];
 }
 
-- (UIButton *)buttonWithButtonName:(NSString *)buttonName
+- (NSKRoundButton *)buttonWithButtonName:(NSString *)buttonName color1:(UIColor *)color1 color2:(UIColor *)color2
 {
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
-    btn.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+    NSKRoundButton *btn = [[NSKRoundButton alloc] initForAutoLayout];
+    btn.fillColor = color1;
+    btn.gradientHighlightColor = color2;
+    btn.rounded = YES;
     [btn setTitle:buttonName forState:UIControlStateNormal];
     [btn addTarget:self
             action:NSSelectorFromString([NSString stringWithFormat:@"didTapButton%@", buttonName])
   forControlEvents:UIControlEventTouchUpInside];
-    btn.translatesAutoresizingMaskIntoConstraints = NO;
     return btn;
 }
 
@@ -143,38 +157,32 @@
 #pragma mark - Buttons
 - (void)didTapButtonA
 {
-    [_soundBankPlayer queueNote:1 gain:0.4f];
-    [_soundBankPlayer playQueuedNotes];
+    [_soundBankPlayer noteOn:1 gain:0.4f];
 }
 
 - (void)didTapButtonB
 {
-    [_soundBankPlayer queueNote:2 gain:0.4f];
-    [_soundBankPlayer playQueuedNotes];
+    [_soundBankPlayer noteOn:2 gain:0.4f];
 }
 
 - (void)didTapButtonX
 {
-    [_soundBankPlayer queueNote:3 gain:0.4f];
-    [_soundBankPlayer playQueuedNotes];
+    [_soundBankPlayer noteOn:3 gain:0.4f];
 }
 
 - (void)didTapButtonY
 {
-    [_soundBankPlayer queueNote:4 gain:0.4f];
-    [_soundBankPlayer playQueuedNotes];
+    [_soundBankPlayer noteOn:4 gain:0.4f];
 }
 
 - (void)didTapButtonL
 {
-    [_soundBankPlayer queueNote:5 gain:0.4f];
-    [_soundBankPlayer playQueuedNotes];
+    [_soundBankPlayer noteOn:5 gain:0.4f];
 }
 
 - (void)didTapButtonR
 {
-    [_soundBankPlayer queueNote:6 gain:0.4f];
-    [_soundBankPlayer playQueuedNotes];
+    [_soundBankPlayer noteOn:6 gain:0.4f];
 }
 
 #pragma mark - Button actions

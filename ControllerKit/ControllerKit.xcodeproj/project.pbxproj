@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28943B4617F5D975002DC8F9 /* NSKRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4517F5D975002DC8F9 /* NSKRoundButton.m */; };
+		28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4817F5DA83002DC8F9 /* UIColor+LightAndDark.m */; };
+		28943B4D17F5DEF8002DC8F9 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4C17F5DEF8002DC8F9 /* UIView+AutoLayout.m */; };
 		28ACF3AC17E0D84B00934C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28ACF3AB17E0D84B00934C6A /* Foundation.framework */; };
 		28ACF3AE17E0D84B00934C6A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28ACF3AD17E0D84B00934C6A /* CoreGraphics.framework */; };
 		28ACF3B017E0D84B00934C6A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28ACF3AF17E0D84B00934C6A /* UIKit.framework */; };
@@ -43,6 +46,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		28943B4417F5D975002DC8F9 /* NSKRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKRoundButton.h; sourceTree = "<group>"; };
+		28943B4517F5D975002DC8F9 /* NSKRoundButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSKRoundButton.m; sourceTree = "<group>"; };
+		28943B4717F5DA83002DC8F9 /* UIColor+LightAndDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LightAndDark.h"; sourceTree = "<group>"; };
+		28943B4817F5DA83002DC8F9 /* UIColor+LightAndDark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LightAndDark.m"; sourceTree = "<group>"; };
+		28943B4B17F5DEF8002DC8F9 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		28943B4C17F5DEF8002DC8F9 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		28ACF3A817E0D84B00934C6A /* ControllerKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ControllerKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28ACF3AB17E0D84B00934C6A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		28ACF3AD17E0D84B00934C6A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -101,6 +110,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28943B4A17F5DA88002DC8F9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				28943B4717F5DA83002DC8F9 /* UIColor+LightAndDark.h */,
+				28943B4817F5DA83002DC8F9 /* UIColor+LightAndDark.m */,
+				28943B4B17F5DEF8002DC8F9 /* UIView+AutoLayout.h */,
+				28943B4C17F5DEF8002DC8F9 /* UIView+AutoLayout.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		28ACF39F17E0D84B00934C6A = {
 			isa = PBXGroup;
 			children = (
@@ -139,8 +159,11 @@
 				28F7268117E108C40061A905 /* 3rd party libraries */,
 				28ACF3BA17E0D84B00934C6A /* NSKAppDelegate.h */,
 				28ACF3BB17E0D84B00934C6A /* NSKAppDelegate.m */,
+				28943B4A17F5DA88002DC8F9 /* Categories */,
 				28ACF3C317E0D84B00934C6A /* NSKViewController.h */,
 				28ACF3C417E0D84B00934C6A /* NSKViewController.m */,
+				28943B4417F5D975002DC8F9 /* NSKRoundButton.h */,
+				28943B4517F5D975002DC8F9 /* NSKRoundButton.m */,
 				28F7267717E101480061A905 /* Sounds */,
 				28ACF3C617E0D84B00934C6A /* Images.xcassets */,
 				28ACF3B217E0D84B00934C6A /* Supporting Files */,
@@ -356,7 +379,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				28F7268617E108D70061A905 /* OpenALSupport.c in Sources */,
+				28943B4D17F5DEF8002DC8F9 /* UIView+AutoLayout.m in Sources */,
+				28943B4617F5D975002DC8F9 /* NSKRoundButton.m in Sources */,
 				28ACF3B817E0D84B00934C6A /* main.m in Sources */,
+				28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */,
 				28ACF3C517E0D84B00934C6A /* NSKViewController.m in Sources */,
 				28ACF3BC17E0D84B00934C6A /* NSKAppDelegate.m in Sources */,
 				28F7268717E108D70061A905 /* SoundBankPlayer.m in Sources */,
