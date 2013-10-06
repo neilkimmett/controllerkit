@@ -11,7 +11,8 @@
 
 @interface NSKIntroViewController () <UICollisionBehaviorDelegate>
 @property (nonatomic, strong) NSArray *items;
-@property (nonatomic, strong) UIDynamicAnimator *animator;
+@property (nonatomic, strong) UIDynamicAnimator *animator1;
+@property (nonatomic, strong) UIDynamicAnimator *animator2;
 @property (nonatomic, assign) BOOL hasController;
 @end
 
@@ -31,25 +32,13 @@
 
     CGRect frame = self.view.bounds;
     
-    UILabel *questionLabel = [[UILabel alloc] init];
-    questionLabel.backgroundColor = [UIColor clearColor];
-    questionLabel.textAlignment = NSTextAlignmentCenter;
-    questionLabel.textColor = [UIColor blackColor];
-    questionLabel.text = @"Hello there. Do you have an iOS7 compatible game controller?";
-    questionLabel.font = [UIFont systemFontOfSize:18];
-    questionLabel.numberOfLines = 0;
+    UILabel *questionLabel = [self labelWithText:@"Hello there. Do you have an iOS7 compatible game controller?"];
     [self.view addSubview:questionLabel];
     
-    UIButton *yesButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    yesButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [yesButton setTitle:@"Yes" forState:UIControlStateNormal];
-    [yesButton addTarget:self action:@selector(didTapYesButton:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *yesButton = [self buttonWithText:@"Yes" action:@selector(didTapYesButton:)];
     [self.view addSubview:yesButton];
     
-    UIButton *noButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    noButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [noButton setTitle:@"No" forState:UIControlStateNormal];
-    [noButton addTarget:self action:@selector(didTapNoButton:) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *noButton = [self buttonWithText:@"No" action:@selector(didTapNoButton:)];
     [self.view addSubview:noButton];
 
     questionLabel.frame = CGRectMake(20, CGRectGetMidY(frame)-50, CGRectGetWidth(frame) - 20, 70);
@@ -64,13 +53,12 @@
 - (void)addDynamicAnimatorWithItems:(NSArray *)items
 {
     UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
-    self.animator = animator;
+    self.animator1 = animator;
     
     UICollisionBehavior *collisionBehaviour = [[UICollisionBehavior alloc] initWithItems:items];
     collisionBehaviour.translatesReferenceBoundsIntoBoundary = YES;
     collisionBehaviour.collisionDelegate = self;
     [animator addBehavior:collisionBehaviour];
-//    self.collisionBehaviour = collisionBehaviour;
     
     UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:items];
 
@@ -88,6 +76,27 @@
     [animator addBehavior:compoundBehaviour];
 }
 
+#pragma mark - Constructors
+- (UILabel *)labelWithText:(NSString *)text
+{
+    UILabel *label = [[UILabel alloc] init];
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor blackColor];
+    label.text = text;
+    label.font = [UIFont systemFontOfSize:18];
+    label.numberOfLines = 0;
+    return label;
+}
+
+- (UIButton *)buttonWithText:(NSString *)text action:(SEL)selector
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+    [button setTitle:text forState:UIControlStateNormal];
+    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    return button;
+}
+
 #pragma mark - Buttons
 - (void)didTapYesButton:(UIButton *)button
 {
@@ -101,6 +110,46 @@
     _hasController = NO;
     button.tintColor = [UIColor greenColor];
     [self addDynamicAnimatorWithItems:self.items];
+    
+    UIView *containerView = [[UIView alloc] init];
+    containerView.userInteractionEnabled = YES;
+    [self.view addSubview:containerView];
+    
+    UILabel *dontWorryLabel = [self labelWithText:@"Don't worry friend! Let's pretend you do, by making an onscreen controller"];
+    [containerView addSubview:dontWorryLabel];
+    
+    UIButton *okButton = [self buttonWithText:@"OK, let's do that!" action:@selector(didTapOKButton:)];
+    [containerView addSubview:okButton];
+    
+    dontWorryLabel.frame = CGRectMake(20, 0, CGRectGetWidth(self.view.frame) - 40, 100);
+    okButton.frame = CGRectMake(0, CGRectGetMaxY(dontWorryLabel.frame), CGRectGetWidth(self.view.frame), 20);
+    
+    CGFloat containerViewHeight = CGRectGetHeight(dontWorryLabel.frame) + CGRectGetHeight(okButton.frame);
+    CGFloat containerViewYOrigin = CGRectGetMinY(self.view.frame) - containerViewHeight;
+    
+    // move view offscreen (to start with)
+    containerView.frame = CGRectMake(0, containerViewYOrigin, CGRectGetWidth(self.view.frame), containerViewHeight);
+
+    UIDynamicAnimator *animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.animator2 = animator;
+    
+    UICollisionBehavior *collisionBehaviour = [[UICollisionBehavior alloc] initWithItems:@[containerView]];
+    
+    CGFloat boundaryYPosition = CGRectGetMidY(self.view.frame) + containerViewHeight/2.;
+    CGPoint startPoint = CGPointMake(0, boundaryYPosition);
+    CGPoint endPoint = CGPointMake(CGRectGetWidth(self.view.frame), boundaryYPosition);
+    [collisionBehaviour addBoundaryWithIdentifier:@"NSKHalfwayBoundaryIdentifier" fromPoint:startPoint toPoint:endPoint];
+    [animator addBehavior:collisionBehaviour];
+
+    UIGravityBehavior *gravityBehaviour = [[UIGravityBehavior alloc] initWithItems:@[containerView]];
+    [animator addBehavior:gravityBehaviour];
+}
+
+- (void)didTapOKButton:(UIButton *)button
+{
+    button.tintColor = [UIColor greenColor];
+    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 #pragma mark - UICollisionBehaviorDelegate
@@ -111,20 +160,7 @@
 {
     // if boundary is near bottom of view
     if (p.y >= CGRectGetMaxY(self.view.frame) - 100) {
-        [self performSelector:@selector(initiateStage2AndRemoveBehaviour:) withObject:behavior afterDelay:1.0];
-    }
-}
-
-#pragma mark - Stage 2
-- (void)initiateStage2AndRemoveBehaviour:(UIDynamicBehavior *)behaviour
-{
-    [self.animator removeBehavior:behaviour];
-    if (_hasController) {
-        // do something
-    }
-    else {
-        NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.animator1 performSelector:@selector(removeBehavior:) withObject:behavior afterDelay:1.0];
     }
 }
 
