@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NSKViewController : UIViewController
+@interface NSKControllerViewController : UIViewController
 
 @end

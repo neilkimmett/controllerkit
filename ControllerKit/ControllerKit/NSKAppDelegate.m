@@ -7,7 +7,7 @@
 //
 
 #import "NSKAppDelegate.h"
-#import "NSKViewController.h"
+#import "NSKControllerViewController.h"
 
 @implementation NSKAppDelegate
 
@@ -16,7 +16,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.tintColor = [UIColor redColor];
 
-    NSKViewController *viewController = [[NSKViewController alloc] init];
+    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
     
     self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];

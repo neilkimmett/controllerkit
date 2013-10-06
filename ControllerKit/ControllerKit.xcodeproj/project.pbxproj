@@ -16,7 +16,7 @@
 		28ACF3B617E0D84B00934C6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28ACF3B417E0D84B00934C6A /* InfoPlist.strings */; };
 		28ACF3B817E0D84B00934C6A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ACF3B717E0D84B00934C6A /* main.m */; };
 		28ACF3BC17E0D84B00934C6A /* NSKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ACF3BB17E0D84B00934C6A /* NSKAppDelegate.m */; };
-		28ACF3C517E0D84B00934C6A /* NSKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ACF3C417E0D84B00934C6A /* NSKViewController.m */; };
+		28ACF3C517E0D84B00934C6A /* NSKControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ACF3C417E0D84B00934C6A /* NSKControllerViewController.m */; };
 		28ACF3C717E0D84B00934C6A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28ACF3C617E0D84B00934C6A /* Images.xcassets */; };
 		28ACF3CE17E0D84B00934C6A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28ACF3CD17E0D84B00934C6A /* XCTest.framework */; };
 		28ACF3CF17E0D84B00934C6A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28ACF3AB17E0D84B00934C6A /* Foundation.framework */; };
@@ -62,8 +62,8 @@
 		28ACF3B917E0D84B00934C6A /* ControllerKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ControllerKit-Prefix.pch"; sourceTree = "<group>"; };
 		28ACF3BA17E0D84B00934C6A /* NSKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKAppDelegate.h; sourceTree = "<group>"; };
 		28ACF3BB17E0D84B00934C6A /* NSKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSKAppDelegate.m; sourceTree = "<group>"; };
-		28ACF3C317E0D84B00934C6A /* NSKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKViewController.h; sourceTree = "<group>"; };
-		28ACF3C417E0D84B00934C6A /* NSKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSKViewController.m; sourceTree = "<group>"; };
+		28ACF3C317E0D84B00934C6A /* NSKControllerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSKControllerViewController.h; sourceTree = "<group>"; };
+		28ACF3C417E0D84B00934C6A /* NSKControllerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NSKControllerViewController.m; sourceTree = "<group>"; };
 		28ACF3C617E0D84B00934C6A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		28ACF3CC17E0D84B00934C6A /* ControllerKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ControllerKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		28ACF3CD17E0D84B00934C6A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -160,8 +160,8 @@
 				28ACF3BA17E0D84B00934C6A /* NSKAppDelegate.h */,
 				28ACF3BB17E0D84B00934C6A /* NSKAppDelegate.m */,
 				28943B4A17F5DA88002DC8F9 /* Categories */,
-				28ACF3C317E0D84B00934C6A /* NSKViewController.h */,
-				28ACF3C417E0D84B00934C6A /* NSKViewController.m */,
+				28ACF3C317E0D84B00934C6A /* NSKControllerViewController.h */,
+				28ACF3C417E0D84B00934C6A /* NSKControllerViewController.m */,
 				28943B4417F5D975002DC8F9 /* NSKRoundButton.h */,
 				28943B4517F5D975002DC8F9 /* NSKRoundButton.m */,
 				28F7267717E101480061A905 /* Sounds */,
@@ -383,7 +383,7 @@
 				28943B4617F5D975002DC8F9 /* NSKRoundButton.m in Sources */,
 				28ACF3B817E0D84B00934C6A /* main.m in Sources */,
 				28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */,
-				28ACF3C517E0D84B00934C6A /* NSKViewController.m in Sources */,
+				28ACF3C517E0D84B00934C6A /* NSKControllerViewController.m in Sources */,
 				28ACF3BC17E0D84B00934C6A /* NSKAppDelegate.m in Sources */,
 				28F7268717E108D70061A905 /* SoundBankPlayer.m in Sources */,
 			);

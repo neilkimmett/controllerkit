@@ -8,18 +8,18 @@
 
 @import GameController;
 
-#import "NSKViewController.h"
+#import "NSKControllerViewController.h"
 #import "UIView+AutoLayout.h"
 #import "SoundBankPlayer.h"
 #import "NSKRoundButton.h"
 #import "UIColor+LightAndDark.h"
 
-@interface NSKViewController ()
+@interface NSKControllerViewController ()
 @property (nonatomic, strong) NSArray *controllerArray;
 @property (nonatomic, strong) SoundBankPlayer *soundBankPlayer;
 @end
 
-@implementation NSKViewController
+@implementation NSKControllerViewController
 
 //RGB color macro
 #define UIColorFromRGB(rgbValue) [UIColor \
