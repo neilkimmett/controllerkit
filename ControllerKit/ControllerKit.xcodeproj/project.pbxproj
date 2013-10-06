@@ -23,6 +23,7 @@
 		28ACF3D017E0D84B00934C6A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28ACF3AF17E0D84B00934C6A /* UIKit.framework */; };
 		28ACF3D817E0D84B00934C6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 28ACF3D617E0D84B00934C6A /* InfoPlist.strings */; };
 		28ACF3DA17E0D84B00934C6A /* ControllerKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28ACF3D917E0D84B00934C6A /* ControllerKitTests.m */; };
+		28F561091801895A00288DDA /* NSKIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F561081801895A00288DDA /* NSKIntroViewController.m */; };
 		28F7267B17E101930061A905 /* CYCdh_K5-Kick01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 28F7267917E101930061A905 /* CYCdh_K5-Kick01.wav */; };
 		28F7267C17E101930061A905 /* CYCdh_K5-Snr04.wav in Resources */ = {isa = PBXBuildFile; fileRef = 28F7267A17E101930061A905 /* CYCdh_K5-Snr04.wav */; };
 		28F7267E17E101A20061A905 /* CYCdh_K5-Tom01c.wav in Resources */ = {isa = PBXBuildFile; fileRef = 28F7267D17E101A20061A905 /* CYCdh_K5-Tom01c.wav */; };
@@ -70,6 +71,8 @@
 		28ACF3D517E0D84B00934C6A /* ControllerKitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ControllerKitTests-Info.plist"; sourceTree = "<group>"; };
 		28ACF3D717E0D84B00934C6A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		28ACF3D917E0D84B00934C6A /* ControllerKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControllerKitTests.m; sourceTree = "<group>"; };
+		28F561071801895A00288DDA /* NSKIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKIntroViewController.h; sourceTree = "<group>"; };
+		28F561081801895A00288DDA /* NSKIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSKIntroViewController.m; sourceTree = "<group>"; };
 		28F7267917E101930061A905 /* CYCdh_K5-Kick01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CYCdh_K5-Kick01.wav"; sourceTree = "<group>"; };
 		28F7267A17E101930061A905 /* CYCdh_K5-Snr04.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CYCdh_K5-Snr04.wav"; sourceTree = "<group>"; };
 		28F7267D17E101A20061A905 /* CYCdh_K5-Tom01c.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CYCdh_K5-Tom01c.wav"; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				28ACF3BA17E0D84B00934C6A /* NSKAppDelegate.h */,
 				28ACF3BB17E0D84B00934C6A /* NSKAppDelegate.m */,
 				28943B4A17F5DA88002DC8F9 /* Categories */,
+				28F561071801895A00288DDA /* NSKIntroViewController.h */,
+				28F561081801895A00288DDA /* NSKIntroViewController.m */,
 				28ACF3C317E0D84B00934C6A /* NSKControllerViewController.h */,
 				28ACF3C417E0D84B00934C6A /* NSKControllerViewController.m */,
 				28943B4417F5D975002DC8F9 /* NSKRoundButton.h */,
@@ -384,6 +389,7 @@
 				28ACF3B817E0D84B00934C6A /* main.m in Sources */,
 				28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */,
 				28ACF3C517E0D84B00934C6A /* NSKControllerViewController.m in Sources */,
+				28F561091801895A00288DDA /* NSKIntroViewController.m in Sources */,
 				28ACF3BC17E0D84B00934C6A /* NSKAppDelegate.m in Sources */,
 				28F7268717E108D70061A905 /* SoundBankPlayer.m in Sources */,
 			);

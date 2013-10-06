@@ -8,6 +8,7 @@
 
 #import "NSKAppDelegate.h"
 #import "NSKControllerViewController.h"
+#import "NSKIntroViewController.h"
 
 @implementation NSKAppDelegate
 
@@ -16,9 +17,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.tintColor = [UIColor redColor];
 
-    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
+//    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
+    NSKIntroViewController *viewController = [[NSKIntroViewController alloc] init];
     
-    self.window.rootViewController = viewController;
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    navController.navigationBarHidden = YES;
+    
+    self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
     return YES;
 }
