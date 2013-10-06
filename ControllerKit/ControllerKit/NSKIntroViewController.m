@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Neil Kimmett. All rights reserved.
 //
 
+@import GameController;
+
 #import "NSKIntroViewController.h"
 #import "NSKControllerViewController.h"
 
@@ -94,18 +96,36 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTitle:text forState:UIControlStateNormal];
     [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    button.titleLabel.font = [UIFont systemFontOfSize:18];
     return button;
 }
 
 #pragma mark - Buttons
 - (void)didTapYesButton:(UIButton *)button
 {
+    [self didTapNoButton:button];
+    return;
+    
     _hasController = YES;
     button.tintColor = [UIColor greenColor];
     [self addDynamicAnimatorWithItems:self.items];
+    
+    [GCController startWirelessControllerDiscoveryWithCompletionHandler:^{
+        [self setupControllers:nil];
+    }];
 }
 
-- (void)didTapNoButton:(UIButton *)button
+- (void)setupControllers:(NSNotification *)notification
+{
+    NSArray *controllerArray = controllerArray = [GCController controllers];
+    for (GCController *controller in controllerArray) {
+        NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
+        [self presentViewController:viewController animated:NO completion:nil];
+        [viewController setupHandlersForController:controller];
+    }
+}
+
+- (void)didTapNoButton:(UIButton *)button 
 {
     _hasController = NO;
     button.tintColor = [UIColor greenColor];
@@ -126,7 +146,7 @@
     
     CGFloat containerViewHeight = CGRectGetHeight(dontWorryLabel.frame) + CGRectGetHeight(okButton.frame);
     CGFloat containerViewYOrigin = CGRectGetMinY(self.view.frame) - containerViewHeight;
-    
+     
     // move view offscreen (to start with)
     containerView.frame = CGRectMake(0, containerViewYOrigin, CGRectGetWidth(self.view.frame), containerViewHeight);
 

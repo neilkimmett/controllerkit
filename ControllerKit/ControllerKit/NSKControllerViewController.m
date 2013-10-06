@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 Neil Kimmett. All rights reserved.
 //
 
-@import GameController;
-
 #import "NSKControllerViewController.h"
 #import "UIView+AutoLayout.h"
 #import "SoundBankPlayer.h"
@@ -53,20 +51,16 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     return UIInterfaceOrientationMaskLandscape;
 }
 
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *connectButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    connectButton.frame = CGRectMake(100, 100, 100, 100);
-    [connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-    [self.view addSubview:connectButton];
-    
-    [connectButton addTarget:self
-                      action:@selector(didTapConnectButton:)
-            forControlEvents:UIControlEventTouchUpInside];
     
     NSMutableArray *buttons = [NSMutableArray array];
     NSDictionary *colorsByButtonName = @{@"A": @[[UIColor redColor], UIColorFromRGB(0xd9294c)],
@@ -99,7 +93,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
     [l autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
     [r autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
-//    [self.view autoDistributeSubviews:@[l, r] alongAxis:ALAxisHorizontal withFixedSize:100 alignment:NSLayoutFormatAlignAllTop];
 }
 
 - (NSKRoundButton *)buttonWithButtonName:(NSString *)buttonName color1:(UIColor *)color1 color2:(UIColor *)color2
@@ -113,14 +106,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
             action:NSSelectorFromString([NSString stringWithFormat:@"didTapButton%@", buttonName])
   forControlEvents:UIControlEventTouchUpInside];
     return btn;
-}
-
-- (void)setupControllers:(NSNotification *)notification
-{
-    self.controllerArray = [GCController controllers];
-    for (GCController *controller in self.controllerArray) {
-        [self setupHandlersForController:controller];
-    }
 }
 
 -(void)setupHandlersForController:(GCController *)controller
@@ -188,14 +173,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)didTapButtonR
 {
     [_soundBankPlayer noteOn:6 gain:0.4f];
-}
-
-#pragma mark - Button actions
-- (void)didTapConnectButton:(UIButton *)button
-{
-    [GCController startWirelessControllerDiscoveryWithCompletionHandler:^{
-        [self setupControllers:nil];
-    }];
 }
 
 @end
