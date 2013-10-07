@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		288EFE3F18035DF100593F2E /* NSKBlurAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288EFE3E18035DF100593F2E /* NSKBlurAnimationController.m */; };
 		28943B4617F5D975002DC8F9 /* NSKRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4517F5D975002DC8F9 /* NSKRoundButton.m */; };
 		28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4817F5DA83002DC8F9 /* UIColor+LightAndDark.m */; };
 		28943B4D17F5DEF8002DC8F9 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4C17F5DEF8002DC8F9 /* UIView+AutoLayout.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		288EFE3D18035DF100593F2E /* NSKBlurAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKBlurAnimationController.h; sourceTree = "<group>"; };
+		288EFE3E18035DF100593F2E /* NSKBlurAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSKBlurAnimationController.m; sourceTree = "<group>"; };
 		28943B4417F5D975002DC8F9 /* NSKRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKRoundButton.h; sourceTree = "<group>"; };
 		28943B4517F5D975002DC8F9 /* NSKRoundButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSKRoundButton.m; sourceTree = "<group>"; };
 		28943B4717F5DA83002DC8F9 /* UIColor+LightAndDark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LightAndDark.h"; sourceTree = "<group>"; };
@@ -169,6 +172,8 @@
 				28ACF3C417E0D84B00934C6A /* NSKControllerViewController.m */,
 				28943B4417F5D975002DC8F9 /* NSKRoundButton.h */,
 				28943B4517F5D975002DC8F9 /* NSKRoundButton.m */,
+				288EFE3D18035DF100593F2E /* NSKBlurAnimationController.h */,
+				288EFE3E18035DF100593F2E /* NSKBlurAnimationController.m */,
 				28F7267717E101480061A905 /* Sounds */,
 				28ACF3C617E0D84B00934C6A /* Images.xcassets */,
 				28ACF3B217E0D84B00934C6A /* Supporting Files */,
@@ -389,6 +394,7 @@
 				28ACF3B817E0D84B00934C6A /* main.m in Sources */,
 				28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */,
 				28ACF3C517E0D84B00934C6A /* NSKControllerViewController.m in Sources */,
+				288EFE3F18035DF100593F2E /* NSKBlurAnimationController.m in Sources */,
 				28F561091801895A00288DDA /* NSKIntroViewController.m in Sources */,
 				28ACF3BC17E0D84B00934C6A /* NSKAppDelegate.m in Sources */,
 				28F7268717E108D70061A905 /* SoundBankPlayer.m in Sources */,

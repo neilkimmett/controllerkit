@@ -10,8 +10,9 @@
 
 #import "NSKIntroViewController.h"
 #import "NSKControllerViewController.h"
+#import "NSKBlurAnimationController.h"
 
-@interface NSKIntroViewController () <UICollisionBehaviorDelegate>
+@interface NSKIntroViewController () <UICollisionBehaviorDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) UIDynamicAnimator *animator1;
 @property (nonatomic, strong) UIDynamicAnimator *animator2;
@@ -29,6 +30,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationController.delegate = self;
     
     self.view.backgroundColor = [UIColor whiteColor];
 
@@ -135,18 +138,18 @@
     containerView.userInteractionEnabled = YES;
     [self.view addSubview:containerView];
     
-    UILabel *dontWorryLabel = [self labelWithText:@"Don't worry friend! Let's pretend you do, by making an onscreen controller"];
+    UILabel *dontWorryLabel = [self labelWithText:@"In which case this app will be a bit useless for you. Don't worry though friend! Let's pretend you do, by making an onscreen controller"];
     [containerView addSubview:dontWorryLabel];
     
     UIButton *okButton = [self buttonWithText:@"OK, let's do that!" action:@selector(didTapOKButton:)];
     [containerView addSubview:okButton];
     
-    dontWorryLabel.frame = CGRectMake(20, 0, CGRectGetWidth(self.view.frame) - 40, 100);
+    dontWorryLabel.frame = CGRectMake(20, 0, CGRectGetWidth(self.view.frame) - 40, 140);
     okButton.frame = CGRectMake(0, CGRectGetMaxY(dontWorryLabel.frame), CGRectGetWidth(self.view.frame), 20);
     
     CGFloat containerViewHeight = CGRectGetHeight(dontWorryLabel.frame) + CGRectGetHeight(okButton.frame);
     CGFloat containerViewYOrigin = CGRectGetMinY(self.view.frame) - containerViewHeight;
-     
+    
     // move view offscreen (to start with)
     containerView.frame = CGRectMake(0, containerViewYOrigin, CGRectGetWidth(self.view.frame), containerViewHeight);
 
@@ -182,6 +185,15 @@
     if (p.y >= CGRectGetMaxY(self.view.frame) - 100) {
         [self.animator1 performSelector:@selector(removeBehavior:) withObject:behavior afterDelay:1.0];
     }
+}
+
+#pragma mark - UINavigationControllerDelegate
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                  animationControllerForOperation:(UINavigationControllerOperation)operation
+                                               fromViewController:(UIViewController *)fromVC
+                                                 toViewController:(UIViewController *)toVC
+{
+    return [[NSKBlurAnimationController alloc] init];
 }
 
 @end
