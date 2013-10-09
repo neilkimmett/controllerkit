@@ -84,22 +84,39 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [buttonsByName[@"A"] autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:buttonsByName[@"X"]];
     [buttonsByName[@"B"] autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:buttonsByName[@"Y"]];
     
-    NSKRoundButton *l = [self buttonWithButtonName:@"L" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
-    l.rounded = NO;
-    NSKRoundButton *r = [self buttonWithButtonName:@"R" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
-    r.rounded = NO;
-    [self.view addSubview:l];
-    [self.view addSubview:r];
-    [l autoSetDimensionsToSize:CGSizeMake(100, 100)];
-    [r autoSetDimensionsToSize:CGSizeMake(100, 100)];
+    NSKRoundButton *l1 = [self buttonWithButtonName:@"L1" color1:[UIColor blackColor] color2:[UIColor darkGrayColor]];
+    l1.rounded = NO;
+    NSKRoundButton *r1 = [self buttonWithButtonName:@"R1" color1:[UIColor blackColor] color2:[UIColor darkGrayColor]];
+    r1.rounded = NO;
+    [self.view addSubview:l1];
+    [self.view addSubview:r1];
+    [l1 autoSetDimensionsToSize:CGSizeMake(100, 100)];
+    [r1 autoSetDimensionsToSize:CGSizeMake(100, 100)];
     
     CGFloat statusBarHeight = [[UIApplication sharedApplication] statusBarFrame].size.height;
     statusBarHeight = 20;
-    [l autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:statusBarHeight];
-    [r autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:statusBarHeight];
+    [l1 autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:statusBarHeight];
+    [r1 autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:statusBarHeight];
     
-    [l autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
-    [r autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
+    [l1 autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
+    [r1 autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
+    
+    NSKRoundButton *l2 = [self buttonWithButtonName:@"L2" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
+    l2.rounded = NO;
+    NSKRoundButton *r2 = [self buttonWithButtonName:@"R2" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
+    r2.rounded = NO;
+    [self.view addSubview:l2];
+    [self.view addSubview:r2];
+    [l2 autoSetDimensionsToSize:CGSizeMake(120, 80)];
+    [r2 autoSetDimensionsToSize:CGSizeMake(120, 80)];
+    
+    [l2 autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:statusBarHeight];
+    [r2 autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:statusBarHeight];
+    
+    CGFloat hairline = 1. / [[UIScreen mainScreen] scale];
+    
+    [l2 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:l1 withOffset:hairline];
+    [r2 autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:r1 withOffset:-hairline];
 }
 
 - (NSKRoundButton *)buttonWithButtonName:(NSString *)buttonName color1:(UIColor *)color1 color2:(UIColor *)color2
@@ -141,12 +158,22 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     };
     profile.leftShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float inputValue, BOOL pressed) {
         if (pressed) {
-            [self didTapButtonL];
+            [self didTapButtonL1];
         }
     };
     profile.rightShoulder.valueChangedHandler = ^(GCControllerButtonInput *button, float inputValue, BOOL pressed) {
         if (pressed) {
-            [self didTapButtonR];
+            [self didTapButtonR1];
+        }
+    };
+    profile.leftTrigger.valueChangedHandler = ^(GCControllerButtonInput *button, float inputValue, BOOL pressed) {
+        if (pressed) {
+            [self didTapButtonL2];
+        }
+    };
+    profile.rightTrigger.valueChangedHandler = ^(GCControllerButtonInput *button, float inputValue, BOOL pressed) {
+        if (pressed) {
+            [self didTapButtonR2];
         }
     };
 }
@@ -172,14 +199,24 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [_soundBankPlayer noteOn:4 gain:0.4f];
 }
 
-- (void)didTapButtonL
+- (void)didTapButtonL1
 {
     [_soundBankPlayer noteOn:5 gain:0.4f];
 }
 
-- (void)didTapButtonR
+- (void)didTapButtonR1
 {
     [_soundBankPlayer noteOn:6 gain:0.4f];
+}
+
+- (void)didTapButtonL2
+{
+    [_soundBankPlayer noteOn:7 gain:0.4f];
+}
+
+- (void)didTapButtonR2
+{
+    [_soundBankPlayer noteOn:8 gain:0.4f];
 }
 
 @end
