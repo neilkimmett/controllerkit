@@ -12,7 +12,7 @@
 #import "NSKControllerViewController.h"
 #import "NSKBlurAnimationController.h"
 
-@interface NSKIntroViewController () <UICollisionBehaviorDelegate, UINavigationControllerDelegate>
+@interface NSKIntroViewController () <UICollisionBehaviorDelegate, UINavigationControllerDelegate, UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic, strong) UIDynamicAnimator *animator1;
 @property (nonatomic, strong) UIDynamicAnimator *animator2;
@@ -21,7 +21,23 @@
 
 @implementation NSKIntroViewController
 
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        
+        [center addObserver:self selector:@selector(setupControllers:)
+                       name:GCControllerDidConnectNotification object:nil];
+        [center addObserver:self selector:@selector(setupControllers:)
+                       name:GCControllerDidDisconnectNotification object:nil];
+
+    }
+    return self;
+}
+
 #pragma mark - View controller config
+
 - (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
@@ -172,7 +188,9 @@
 {
     button.tintColor = [UIColor greenColor];
     NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
-    [self.navigationController pushViewController:viewController animated:YES];
+//    [self.navigationController pushViewController:viewController animated:YES];
+    viewController.transitioningDelegate = self;
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 #pragma mark - UICollisionBehaviorDelegate
@@ -194,6 +212,17 @@
                                                  toViewController:(UIViewController *)toVC
 {
     return [[NSKBlurAnimationController alloc] init];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    return [[NSKBlurAnimationController alloc] init];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+   return [[NSKBlurAnimationController alloc] init];
 }
 
 @end

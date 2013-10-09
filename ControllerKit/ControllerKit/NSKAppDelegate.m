@@ -20,12 +20,16 @@
 //    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
     NSKIntroViewController *viewController = [[NSKIntroViewController alloc] init];
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    navController.navigationBarHidden = YES;
+//    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+//    navController.navigationBarHidden = YES;
     
-    self.window.rootViewController = navController;
+    self.window.rootViewController = viewController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

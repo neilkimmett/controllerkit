@@ -29,12 +29,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 {
     self = [super init];
     if (self) {
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        
-        [center addObserver:self selector:@selector(setupControllers:)
-                        name:GCControllerDidConnectNotification object:nil];
-        [center addObserver:self selector:@selector(setupControllers:)
-                        name:GCControllerDidDisconnectNotification object:nil];
         [self setupAudioPlayer];
     }
     return self;
@@ -44,6 +38,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 {
     _soundBankPlayer = [[SoundBankPlayer alloc] init];
     [_soundBankPlayer setSoundBank:@"Acoustic"];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationLandscapeLeft;
 }
 
 - (NSUInteger)supportedInterfaceOrientations

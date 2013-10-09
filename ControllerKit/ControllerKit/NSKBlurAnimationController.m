@@ -12,7 +12,7 @@
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return 0.7;
+    return 1.0;
 }
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
@@ -41,7 +41,7 @@
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:containerView.bounds];
     [containerView insertSubview:toolbar aboveSubview:toView];
     
-    toView.transform = CGAffineTransformMakeScale(0.6, 0.6);
+    toView.transform = CGAffineTransformMakeRotation(-M_PI_2);
     
     fromView.backgroundColor = [UIColor clearColor];
     
@@ -50,7 +50,6 @@
     [UIView animateWithDuration:duration animations:^{
         fromView.alpha = 0.0;
         toolbar.alpha = 0.0;
-        toView.transform = CGAffineTransformMakeScale(1.0, 1.0);
         fromView.transform = CGAffineTransformMakeScale(1.6, 1.6);
     } completion:^(BOOL finished) {
         if ([transitionContext transitionWasCancelled]) {
@@ -62,6 +61,21 @@
         }
         [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationLandscapeLeft;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (BOOL)shouldAutorotate
+{
+    return YES;
 }
 
 @end
