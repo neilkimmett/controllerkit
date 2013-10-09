@@ -61,7 +61,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    NSMutableArray *buttons = [NSMutableArray array];
+    NSMutableDictionary *buttonsByName = [NSMutableDictionary dictionary];
     NSDictionary *colorsByButtonName = @{@"A": @[[UIColor redColor], UIColorFromRGB(0xd9294c)],
                                           @"B": @[[UIColor greenColor], UIColorFromRGB(0x2cdd2d)],
                                           @"X": @[[UIColor yellowColor], UIColorFromRGB(0xe9eb3a)],
@@ -69,12 +69,20 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [colorsByButtonName enumerateKeysAndObjectsUsingBlock:^(NSString *buttonName, NSArray *colors, BOOL *stop) {
         UIButton *btn = [self buttonWithButtonName:buttonName color1:colors[0] color2:colors[1]];
         [self.view addSubview:btn];
-        [buttons addObject:btn];
+        buttonsByName[buttonName] = btn;
         
-        [btn autoSetDimension:ALDimensionHeight toSize:100];
-        [btn autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+        [btn autoSetDimensionsToSize:CGSizeMake(100, 100)];
     }];
-    [self.view autoDistributeSubviews:buttons alongAxis:ALAxisHorizontal withFixedSize:100 alignment:NSLayoutFormatAlignAllTop];
+    
+    [buttonsByName[@"Y"] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
+    [buttonsByName[@"B"] autoPinEdgeToSuperviewEdge:ALEdgeRight withInset:0];
+    [buttonsByName[@"X"] autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:buttonsByName[@"Y"]];
+    [buttonsByName[@"A"] autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:buttonsByName[@"B"]];
+    
+    [buttonsByName[@"X"] autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [buttonsByName[@"Y"] autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:0];
+    [buttonsByName[@"A"] autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:buttonsByName[@"X"]];
+    [buttonsByName[@"B"] autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:buttonsByName[@"Y"]];
     
     NSKRoundButton *l = [self buttonWithButtonName:@"L" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
     l.rounded = NO;
