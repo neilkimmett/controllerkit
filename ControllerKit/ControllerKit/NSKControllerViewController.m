@@ -11,6 +11,9 @@
 #import "SoundBankPlayer.h"
 #import "NSKRoundButton.h"
 #import "UIColor+LightAndDark.h"
+#import "NSString+FontAwesome.h"
+#import "UIFont+FontAwesome.h"
+#import "NSKDPadButton.h"
 
 @interface NSKControllerViewController ()
 @property (nonatomic, strong) NSArray *controllerArray;
@@ -117,6 +120,29 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
     [l2 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:l1 withOffset:hairline];
     [r2 autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:r1 withOffset:-hairline];
+    
+    NSKDPadButton *dPadButton = [[NSKDPadButton alloc] initForAutoLayout];
+    [self.view addSubview:dPadButton];
+    [dPadButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:20];
+    [dPadButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:20];
+    [dPadButton autoSetDimension:ALDimensionWidth toSize:30];
+    [dPadButton autoSetDimension:ALDimensionHeight toSize:100];
+    
+    
+    UILabel *settingsButtonLabel = [[UILabel alloc] initForAutoLayout];
+    settingsButtonLabel.userInteractionEnabled = YES;
+    settingsButtonLabel.font = [UIFont iconicFontOfSize:20];
+    settingsButtonLabel.textColor = [UIColor darkGrayColor];
+    settingsButtonLabel.highlightedTextColor = [UIColor grayColor];
+    settingsButtonLabel.text = [NSString fontAwesomeIconStringForIconIdentifier:@"icon-cogs"];
+    [self.view addSubview:settingsButtonLabel];
+    
+    UITapGestureRecognizer *settingsGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(didTapSettingsButton:)];
+    [settingsButtonLabel addGestureRecognizer:settingsGestureRecognizer];
+    
+    [settingsButtonLabel autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:statusBarHeight];
+    [settingsButtonLabel autoCenterInSuperviewAlongAxis:ALAxisVertical];
 }
 
 - (NSKRoundButton *)buttonWithButtonName:(NSString *)buttonName color1:(UIColor *)color1 color2:(UIColor *)color2
@@ -217,6 +243,11 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)didTapButtonR2
 {
     [_soundBankPlayer noteOn:8 gain:0.4f];
+}
+
+- (void)didTapSettingsButton:(UITapGestureRecognizer *)gesture
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

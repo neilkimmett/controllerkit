@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		287A54FC184F9F9400D3C96C /* NSKDPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 287A54FB184F9F9400D3C96C /* NSKDPadButton.m */; };
 		28858D001805D07F0059231C /* CYCdh_K5-PdHat.wav in Resources */ = {isa = PBXBuildFile; fileRef = 28858CFF1805D07F0059231C /* CYCdh_K5-PdHat.wav */; };
 		28858D021805D0B00059231C /* CYCdh_K6-OpHat01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 28858D011805D0B00059231C /* CYCdh_K6-OpHat01.wav */; };
+		28858D081805D3C80059231C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28858D031805D3C80059231C /* FontAwesome.ttf */; };
+		28858D091805D3C80059231C /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 28858D051805D3C80059231C /* NSString+FontAwesome.m */; };
+		28858D0A1805D3C80059231C /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 28858D071805D3C80059231C /* UIFont+FontAwesome.m */; };
 		288EFE3F18035DF100593F2E /* NSKBlurAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288EFE3E18035DF100593F2E /* NSKBlurAnimationController.m */; };
 		28943B4617F5D975002DC8F9 /* NSKRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4517F5D975002DC8F9 /* NSKRoundButton.m */; };
 		28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */ = {isa = PBXBuildFile; fileRef = 28943B4817F5DA83002DC8F9 /* UIColor+LightAndDark.m */; };
@@ -50,8 +54,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		287A54FA184F9F9400D3C96C /* NSKDPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKDPadButton.h; sourceTree = "<group>"; };
+		287A54FB184F9F9400D3C96C /* NSKDPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSKDPadButton.m; sourceTree = "<group>"; };
 		28858CFF1805D07F0059231C /* CYCdh_K5-PdHat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CYCdh_K5-PdHat.wav"; sourceTree = "<group>"; };
 		28858D011805D0B00059231C /* CYCdh_K6-OpHat01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "CYCdh_K6-OpHat01.wav"; sourceTree = "<group>"; };
+		28858D031805D3C80059231C /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = FontAwesome/FontAwesome.ttf; sourceTree = "<group>"; };
+		28858D041805D3C80059231C /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+FontAwesome.h"; path = "FontAwesome/NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		28858D051805D3C80059231C /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+FontAwesome.m"; path = "FontAwesome/NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		28858D061805D3C80059231C /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+FontAwesome.h"; path = "FontAwesome/UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		28858D071805D3C80059231C /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+FontAwesome.m"; path = "FontAwesome/UIFont+FontAwesome.m"; sourceTree = "<group>"; };
 		288EFE3D18035DF100593F2E /* NSKBlurAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKBlurAnimationController.h; sourceTree = "<group>"; };
 		288EFE3E18035DF100593F2E /* NSKBlurAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSKBlurAnimationController.m; sourceTree = "<group>"; };
 		28943B4417F5D975002DC8F9 /* NSKRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSKRoundButton.h; sourceTree = "<group>"; };
@@ -120,6 +131,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		28858D0B1805D3CE0059231C /* FontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				28858D031805D3C80059231C /* FontAwesome.ttf */,
+				28858D041805D3C80059231C /* NSString+FontAwesome.h */,
+				28858D051805D3C80059231C /* NSString+FontAwesome.m */,
+				28858D061805D3C80059231C /* UIFont+FontAwesome.h */,
+				28858D071805D3C80059231C /* UIFont+FontAwesome.m */,
+			);
+			name = FontAwesome;
+			sourceTree = "<group>";
+		};
 		28943B4A17F5DA88002DC8F9 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +199,8 @@
 				28ACF3C417E0D84B00934C6A /* NSKControllerViewController.m */,
 				28943B4417F5D975002DC8F9 /* NSKRoundButton.h */,
 				28943B4517F5D975002DC8F9 /* NSKRoundButton.m */,
+				287A54FA184F9F9400D3C96C /* NSKDPadButton.h */,
+				287A54FB184F9F9400D3C96C /* NSKDPadButton.m */,
 				288EFE3D18035DF100593F2E /* NSKBlurAnimationController.h */,
 				288EFE3E18035DF100593F2E /* NSKBlurAnimationController.m */,
 				28F7267717E101480061A905 /* Sounds */,
@@ -241,6 +266,7 @@
 		28F7268117E108C40061A905 /* 3rd party libraries */ = {
 			isa = PBXGroup;
 			children = (
+				28858D0B1805D3CE0059231C /* FontAwesome */,
 				28F7268817E108DE0061A905 /* SoundBankPlayer */,
 			);
 			name = "3rd party libraries";
@@ -347,6 +373,7 @@
 				28ACF3B617E0D84B00934C6A /* InfoPlist.strings in Resources */,
 				28F7267B17E101930061A905 /* CYCdh_K5-Kick01.wav in Resources */,
 				28F7268E17E10B990061A905 /* CYCdh_K5-OpHat02.wav in Resources */,
+				28858D081805D3C80059231C /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,12 +427,15 @@
 				28943B4D17F5DEF8002DC8F9 /* UIView+AutoLayout.m in Sources */,
 				28943B4617F5D975002DC8F9 /* NSKRoundButton.m in Sources */,
 				28ACF3B817E0D84B00934C6A /* main.m in Sources */,
+				28858D091805D3C80059231C /* NSString+FontAwesome.m in Sources */,
 				28943B4917F5DA83002DC8F9 /* UIColor+LightAndDark.m in Sources */,
+				287A54FC184F9F9400D3C96C /* NSKDPadButton.m in Sources */,
 				28ACF3C517E0D84B00934C6A /* NSKControllerViewController.m in Sources */,
 				288EFE3F18035DF100593F2E /* NSKBlurAnimationController.m in Sources */,
 				28F561091801895A00288DDA /* NSKIntroViewController.m in Sources */,
 				28ACF3BC17E0D84B00934C6A /* NSKAppDelegate.m in Sources */,
 				28F7268717E108D70061A905 /* SoundBankPlayer.m in Sources */,
+				28858D0A1805D3C80059231C /* UIFont+FontAwesome.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

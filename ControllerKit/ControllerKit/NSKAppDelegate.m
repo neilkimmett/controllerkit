@@ -17,8 +17,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.tintColor = [UIColor redColor];
 
-//    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
-    NSKIntroViewController *viewController = [[NSKIntroViewController alloc] init];
+    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
+//    NSKIntroViewController *viewController = [[NSKIntroViewController alloc] init];
     
 //    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
 //    navController.navigationBarHidden = YES;
