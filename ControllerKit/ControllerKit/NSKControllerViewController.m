@@ -121,13 +121,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     [l2 autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:l1 withOffset:hairline];
     [r2 autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:r1 withOffset:-hairline];
     
-    NSKDPadButton *dPadButton = [[NSKDPadButton alloc] initForAutoLayout];
-    [self.view addSubview:dPadButton];
-    [dPadButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:20];
-    [dPadButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:20];
-    [dPadButton autoSetDimension:ALDimensionWidth toSize:30];
-    [dPadButton autoSetDimension:ALDimensionHeight toSize:100];
-    
+    [self buildDPad];
     
     UILabel *settingsButtonLabel = [[UILabel alloc] initForAutoLayout];
     settingsButtonLabel.userInteractionEnabled = YES;
@@ -158,6 +152,46 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     return btn;
 }
 
+#pragma mark - View building
+- (void)buildDPad
+{
+    CGFloat buttonLength = 80;
+    CGFloat buttonWidth = 40;
+    CGFloat padding = 20;
+
+    NSKDPadButton *upButton = [[NSKDPadButton alloc] initForAutoLayout];
+    [self.view addSubview:upButton];
+    [upButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding + buttonLength];
+    [upButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding + buttonLength - buttonWidth/2.];
+    [upButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
+    [upButton autoSetDimension:ALDimensionHeight toSize:buttonLength];
+    
+    NSKDPadButton *downButton = [[NSKDPadButton alloc] initForAutoLayout];
+    [self.view addSubview:downButton];
+    [downButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding];
+    [downButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding + buttonLength - buttonWidth/2.];
+    [downButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
+    [downButton autoSetDimension:ALDimensionHeight toSize:buttonLength];
+    downButton.transform = CGAffineTransformMakeRotation(M_PI);
+    
+    NSKDPadButton *rightButton = [[NSKDPadButton alloc] initForAutoLayout];
+    [self.view addSubview:rightButton];
+    [rightButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding + buttonLength - buttonWidth/2.];
+    [rightButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding + buttonLength];
+    [rightButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
+    [rightButton autoSetDimension:ALDimensionHeight toSize:buttonLength];
+    rightButton.transform = CGAffineTransformMakeRotation(M_PI_2);
+    
+    NSKDPadButton *leftButton = [[NSKDPadButton alloc] initForAutoLayout];
+    [self.view addSubview:leftButton];
+    [leftButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding + buttonLength - buttonWidth/2.];
+    [leftButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding];
+    [leftButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
+    [leftButton autoSetDimension:ALDimensionHeight toSize:buttonLength];
+    leftButton.transform = CGAffineTransformMakeRotation(3*M_PI_2);
+}
+
+#pragma mark - Button handlers
 -(void)setupHandlersForController:(GCController *)controller
 {
     GCExtendedGamepad *profile = controller.extendedGamepad;
@@ -204,7 +238,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     };
 }
 
-#pragma mark - Buttons
+#pragma mark - Sound playing
 - (void)didTapButtonA
 {
     [_soundBankPlayer noteOn:1 gain:0.4f];
