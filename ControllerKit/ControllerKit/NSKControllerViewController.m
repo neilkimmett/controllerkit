@@ -17,6 +17,8 @@
 
 @interface NSKControllerViewController ()
 @property (nonatomic, strong) NSArray *controllerArray;
+@property (nonatomic, strong) UIView *fakeControllerView;
+@property (nonatomic, strong) UIView *drumSoundNamesView;
 @property (nonatomic, strong) SoundBankPlayer *soundBankPlayer;
 @end
 
@@ -64,6 +66,19 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    UIView *fakeControllerView = [[UIView alloc] initForAutoLayout];
+    [self.view addSubview:fakeControllerView];
+    [fakeControllerView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+    self.fakeControllerView = fakeControllerView;
+    
+    UIView *drumSoundNamesView = [[UIView alloc] initForAutoLayout];
+    [self.view addSubview:drumSoundNamesView];
+    [drumSoundNamesView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsZero];
+    self.drumSoundNamesView = drumSoundNamesView;
+    
+//    self.drumSoundNamesView.hidden = YES;
+    // TODO: disable
+    
     NSMutableDictionary *buttonsByName = [NSMutableDictionary dictionary];
     NSDictionary *colorsByButtonName = @{@"A": @[[UIColor redColor], UIColorFromRGB(0xd9294c)],
                                           @"B": @[[UIColor greenColor], UIColorFromRGB(0x2cdd2d)],
@@ -71,7 +86,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
                                           @"Y": @[[UIColor cyanColor], UIColorFromRGB(0x29d6f3)]};
     [colorsByButtonName enumerateKeysAndObjectsUsingBlock:^(NSString *buttonName, NSArray *colors, BOOL *stop) {
         UIButton *btn = [self buttonWithButtonName:buttonName color1:colors[0] color2:colors[1]];
-        [self.view addSubview:btn];
+        [self.fakeControllerView addSubview:btn];
         buttonsByName[buttonName] = btn;
         
         [btn autoSetDimensionsToSize:CGSizeMake(100, 100)];
@@ -91,8 +106,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     l1.rounded = NO;
     NSKRoundButton *r1 = [self buttonWithButtonName:@"R1" color1:[UIColor blackColor] color2:[UIColor darkGrayColor]];
     r1.rounded = NO;
-    [self.view addSubview:l1];
-    [self.view addSubview:r1];
+    [self.fakeControllerView addSubview:l1];
+    [self.fakeControllerView addSubview:r1];
     [l1 autoSetDimensionsToSize:CGSizeMake(100, 100)];
     [r1 autoSetDimensionsToSize:CGSizeMake(100, 100)];
     
@@ -108,8 +123,8 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     l2.rounded = NO;
     NSKRoundButton *r2 = [self buttonWithButtonName:@"R2" color1:[UIColor grayColor] color2:[UIColor darkGrayColor]];
     r2.rounded = NO;
-    [self.view addSubview:l2];
-    [self.view addSubview:r2];
+    [self.fakeControllerView addSubview:l2];
+    [self.fakeControllerView addSubview:r2];
     [l2 autoSetDimensionsToSize:CGSizeMake(120, 80)];
     [r2 autoSetDimensionsToSize:CGSizeMake(120, 80)];
     
@@ -156,18 +171,18 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)buildDPad
 {
     CGFloat buttonLength = 80;
-    CGFloat buttonWidth = 40;
+    CGFloat buttonWidth = 60;
     CGFloat padding = 20;
 
     NSKDPadButton *upButton = [[NSKDPadButton alloc] initForAutoLayout];
-    [self.view addSubview:upButton];
+    [self.fakeControllerView addSubview:upButton];
     [upButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding + buttonLength];
     [upButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding + buttonLength - buttonWidth/2.];
     [upButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
     [upButton autoSetDimension:ALDimensionHeight toSize:buttonLength];
     
     NSKDPadButton *downButton = [[NSKDPadButton alloc] initForAutoLayout];
-    [self.view addSubview:downButton];
+    [self.fakeControllerView addSubview:downButton];
     [downButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding];
     [downButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding + buttonLength - buttonWidth/2.];
     [downButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
@@ -175,7 +190,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     downButton.transform = CGAffineTransformMakeRotation(M_PI);
     
     NSKDPadButton *rightButton = [[NSKDPadButton alloc] initForAutoLayout];
-    [self.view addSubview:rightButton];
+    [self.fakeControllerView addSubview:rightButton];
     [rightButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding + buttonLength - buttonWidth/2.];
     [rightButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding + buttonLength];
     [rightButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
@@ -183,7 +198,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     rightButton.transform = CGAffineTransformMakeRotation(M_PI_2);
     
     NSKDPadButton *leftButton = [[NSKDPadButton alloc] initForAutoLayout];
-    [self.view addSubview:leftButton];
+    [self.fakeControllerView addSubview:leftButton];
     [leftButton autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:padding + buttonLength - buttonWidth/2.];
     [leftButton autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:padding];
     [leftButton autoSetDimension:ALDimensionWidth toSize:buttonWidth];
@@ -194,6 +209,9 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #pragma mark - Button handlers
 -(void)setupHandlersForController:(GCController *)controller
 {
+    self.fakeControllerView.hidden = YES;
+    self.drumSoundNamesView.hidden = NO;
+    
     GCExtendedGamepad *profile = controller.extendedGamepad;
     
     profile.buttonA.valueChangedHandler = ^(GCControllerButtonInput *button, float inputValue, BOOL pressed) {
@@ -242,42 +260,70 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 - (void)didTapButtonA
 {
     [_soundBankPlayer noteOn:1 gain:0.4f];
+    [self showDrumNameForName:@"Kick"];
 }
 
 - (void)didTapButtonB
 {
     [_soundBankPlayer noteOn:2 gain:0.4f];
+    [self showDrumNameForName:@"Snare"];
 }
 
 - (void)didTapButtonX
 {
     [_soundBankPlayer noteOn:3 gain:0.4f];
+    [self showDrumNameForName:@"Tom 1"];
 }
 
 - (void)didTapButtonY
 {
     [_soundBankPlayer noteOn:4 gain:0.4f];
+    [self showDrumNameForName:@"Tom 2"];
 }
 
 - (void)didTapButtonL1
 {
     [_soundBankPlayer noteOn:5 gain:0.4f];
+    [self showDrumNameForName:@"Hi-hat (open)"];
 }
 
 - (void)didTapButtonR1
 {
     [_soundBankPlayer noteOn:6 gain:0.4f];
+    [self showDrumNameForName:@"Hi-hat (closed)"];
 }
 
 - (void)didTapButtonL2
 {
     [_soundBankPlayer noteOn:7 gain:0.4f];
+    [self showDrumNameForName:@"Pd-Hat (what?)"];
 }
 
 - (void)didTapButtonR2
 {
     [_soundBankPlayer noteOn:8 gain:0.4f];
+    [self showDrumNameForName:@"Hi-hat (again)"];
 }
+
+#pragma mark - Drum name displaying
+- (void)showDrumNameForName:(NSString *)name
+{
+    UILabel *drumNameLabel = [[UILabel alloc] init];
+    drumNameLabel.backgroundColor = [UIColor clearColor];
+    drumNameLabel.font = [UIFont systemFontOfSize:26];
+    drumNameLabel.textColor = [UIColor blackColor];
+    drumNameLabel.text = name;
+    drumNameLabel.frame = self.drumSoundNamesView.bounds;
+    [self.drumSoundNamesView addSubview:drumNameLabel];
+    
+    [UIView animateWithDuration:0.5 delay:0.2 options:0 animations:^{
+        drumNameLabel.frame = CGRectInset(self.drumSoundNamesView.bounds, 200, 200);
+        drumNameLabel.alpha = 0.0;
+    } completion:nil];
+}
+
+
+#pragma mark - Settings
 
 - (void)didTapSettingsButton:(UITapGestureRecognizer *)gesture
 {

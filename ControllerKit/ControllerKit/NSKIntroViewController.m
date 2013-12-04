@@ -27,9 +27,9 @@
     if (self) {
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         
-        [center addObserver:self selector:@selector(setupControllers:)
+        [center addObserver:self selector:@selector(controllerDidConnectFromNotification:)
                        name:GCControllerDidConnectNotification object:nil];
-        [center addObserver:self selector:@selector(setupControllers:)
+        [center addObserver:self selector:@selector(controllerDidDisconnectFromNotification:)
                        name:GCControllerDidDisconnectNotification object:nil];
 
     }
@@ -122,26 +122,11 @@
 #pragma mark - Buttons
 - (void)didTapYesButton:(UIButton *)button
 {
-    [self didTapNoButton:button];
-    return;
-    
     _hasController = YES;
     button.tintColor = [UIColor greenColor];
     [self addDynamicAnimatorWithItems:self.items];
     
-    [GCController startWirelessControllerDiscoveryWithCompletionHandler:^{
-        [self setupControllers:nil];
-    }];
-}
-
-- (void)setupControllers:(NSNotification *)notification
-{
-    NSArray *controllerArray = controllerArray = [GCController controllers];
-    for (GCController *controller in controllerArray) {
-        NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
-        [self presentViewController:viewController animated:NO completion:nil];
-        [viewController setupHandlersForController:controller];
-    }
+    [GCController startWirelessControllerDiscoveryWithCompletionHandler:nil];
 }
 
 - (void)didTapNoButton:(UIButton *)button 
@@ -191,6 +176,16 @@
 //    [self.navigationController pushViewController:viewController animated:YES];
     viewController.transitioningDelegate = self;
     [self presentViewController:viewController animated:YES completion:nil];
+}
+
+#pragma mark - Controller notifications
+
+- (void)controllerDidConnectFromNotification:(NSNotification *)notification
+{
+    GCController *controller = [[GCController controllers] firstObject];
+    NSKControllerViewController *viewController = [[NSKControllerViewController alloc] init];
+    [self presentViewController:viewController animated:NO completion:nil];
+    [viewController setupHandlersForController:controller];
 }
 
 #pragma mark - UICollisionBehaviorDelegate
